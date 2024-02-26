@@ -2,6 +2,11 @@
 
 This is a rework of the original PiStorm2K to add some additional potential capabilities while remaining 100% compatible with existing and future firmware. 
 
+The original PiStorm2K was imported from Gerbers into KiCAD and then revised. The initial KiCAD PiStorm2K is also contained within this repo however there were a lots of bits clean-up on v2.0 that didn't happen on v1.0. 
+
+# Status
+UNTESTED - Initial production ordered 26/02/2024
+
 # Summary of changes
 ### Additional control lines.
 
