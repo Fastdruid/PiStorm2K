@@ -5,45 +5,45 @@ This is a rework of the original PiStorm2K to add some additional potential capa
 # Summary of changes
 ### Additional control lines.
 
-INT2 => Pin 87
-CFGOUTn => Pin 92
-INT6 => Pin 1
-XRDY => Pin 95
-OVR => Pin 11
+INT2 => Pin 87  
+CFGOUTn => Pin 92  
+INT6 => Pin 1  
+XRDY => Pin 95  
+OVR => Pin 11  
 
 ### Additional Headers / Jumpers
 
-INT PWR => INTernal PoWeR - Optional to power the RPi from the board or use a seperate Power Supply. 
-EXT => Extra - For future expansion
-E RES => This is a bit of a specialist one, this edition can be used in a normal Zorro slot with some modifications. Depending on board you may need to add a 68R resistor to the E-Clock. This jumper **BYPASSES** it. A/B2000 users should either have a jumper or solder the blob. 
-CLK SEL => CLocK SELect - Close to use C1/C3 for the clock. Note that the 7MHz clock is *ALWAYS* recommended over the C1/C3 if you have it. 
-BJ => Pull down BOSS (pin 20) to GND to take over from the onboard processor. 
-JTAG => TDI, TCK, TMS, TDO header (see section on JTAG). 
-PWR => +5V, GND, VCC_INT and VCC. Normally VCC and VCC_INT will be identical at 3.3v however if MAX V is used with the second 1.8v regulator VCC_INT will be 1.8v. 
-IPL2-0 => IPL2, IPL1, IPL0. - Another specialist one. (see "use in Zorro-II slots")
+INT PWR => INTernal PoWeR - Optional to power the RPi from the board or use a seperate Power Supply.   
+EXT => Extra - For future expansion  
+E RES => This is a bit of a specialist one, this edition can be used in a normal Zorro slot with some modifications. Depending on board you may need to add a 68R resistor to the E-Clock. This jumper **BYPASSES** it. A/B2000 users should either have a jumper or solder the blob.   
+CLK SEL => CLocK SELect - Close to use C1/C3 for the clock. Note that the 7MHz clock is *ALWAYS* recommended over the C1/C3 if you have it.   
+BJ => Pull down BOSS (pin 20) to GND to take over from the onboard processor.   
+JTAG => TDI, TCK, TMS, TDO header (see section on JTAG).   
+PWR => +5V, GND, VCC_INT and VCC. Normally VCC and VCC_INT will be identical at 3.3v however if MAX V is used with the second 1.8v regulator VCC_INT will be 1.8v.   
+IPL2-0 => IPL2, IPL1, IPL0. - Another specialist one. (see "use in Zorro-II slots")  
 
 ### Solder blob jumpers
 
-SJ1 - Close to use C1/C3 - semi-permanent version of **CLK SEL** Jumper. A2000 users should close this. B2000 should leave it open. 
-SJ2 - Close to bypass 68R on E-Clock - semi-permanent version of **E RES** Jumper. A2000 and B2000 users should close this.
-BOSS - Close to pull BOSS down to GND - semi-permanent version of BOSS Jumper.
-D-BOSS - Cut to disable pin 20 (see "use in Zorro slot").
-TDI => Cut pin 1-2 to disable TDI to the CPLD. Close 2-3 to redirect RPi Pin 13 (GPIO27) to Pin 89 on the CPLD.
-TMS => Cut pin 1-2 to disable TMS to the CPLD. Close 2-3 to redirect RPi Pin 18 (GPIO24) to Pin 91 on the CPLD.
-TDO => Cut pin 1-2 to disable TDO to the CPLD. Close 2-3 to redirect RPi Pin 22 (GPIO25) to Pin 85 on the CPLD.
-TCK => Cut pin 1-2 to disable TCK to the CPLD. Close 2-3 to redirect RPi Pin 37 (GPIO26) to Pin 86 on the CPLD.
-7MHz => Cut to disconnect pin 7 (see "use in Zorro-II slots")
+SJ1 - Close to use C1/C3 - semi-permanent version of **CLK SEL** Jumper. A2000 users should close this. B2000 should leave it open.   
+SJ2 - Close to bypass 68R on E-Clock - semi-permanent version of **E RES** Jumper. A2000 and B2000 users should close this.  
+BOSS - Close to pull BOSS down to GND - semi-permanent version of BOSS Jumper.  
+D-BOSS - Cut to disable pin 20 (see "use in Zorro slot").  
+TDI => Cut pin 1-2 to disable TDI to the CPLD. Close 2-3 to redirect RPi Pin 13 (GPIO27) to Pin 89 on the CPLD.  
+TMS => Cut pin 1-2 to disable TMS to the CPLD. Close 2-3 to redirect RPi Pin 18 (GPIO24) to Pin 91 on the CPLD.  
+TDO => Cut pin 1-2 to disable TDO to the CPLD. Close 2-3 to redirect RPi Pin 22 (GPIO25) to Pin 85 on the CPLD.  
+TCK => Cut pin 1-2 to disable TCK to the CPLD. Close 2-3 to redirect RPi Pin 37 (GPIO26) to Pin 86 on the CPLD.  
+7MHz => Cut to disconnect pin 7 (see "use in Zorro-II slots").  
 
 ### Extra pins
-The remaining 4 extra pins are brought out to solder pads. 
-P78 - Pin 78 CPLD
-P81 - Pin 81 CPLD
-P82 - Pin 82 CPLD
-P83 - Pin 83 CPLD
+The remaining 4 extra pins are brought out to solder pads.   
+P78 - Pin 78 CPLD  
+P81 - Pin 81 CPLD  
+P82 - Pin 82 CPLD  
+P83 - Pin 83 CPLD  
 
 # Use in Zorro-II slots. 
 
-This can be used in an unbuffered Zorro-II slot noting a couple of potential issues.
+This can be used in an unbuffered Zorro-II slot noting a couple of potential issues.  
 
 1) Zorro is a 100 pin slot, the Co-Processor is 86. It *must* be fitted so pin 1 is at pin 1. That means that there should be a space at the "front" of the Amiga. 
 2) Pin 20 on Zorro-II is -12v. If you plug this straight in you will fry the CPLD. Cut the D-BOSS solder jumper and ensure there is no continuity across it.
@@ -60,14 +60,14 @@ If you wish to program the CPLD via this method use the following pinout to conn
 
 <IMG SRC="https://www.raspberrypi.com/documentation/computers/images/GPIO-Pinout-Diagram-2.png">
 
-Pin 13 on the Pi to TDI  (Pin 1, top of the board)
-Pin 37 on the Pi to TCK  (Pin 2)
-Pin 18 on the Pi to TMS  (Pin 3)
-Pin 22 on the Pi to TDO  (Pin 4)
+Pin 13 on the Pi to TDI  (Pin 1, top of the board)  
+Pin 37 on the Pi to TCK  (Pin 2)  
+Pin 18 on the Pi to TMS  (Pin 3)  
+Pin 22 on the Pi to TDO  (Pin 4)  
 
 You will also need to connect power and ground to the Pi. To aid in this there is a second header next to the JTAG header marked PWR, connect power as follows.
-Pin 1 or 2 on the Pi to Pin 1 (+5V)
-Pin 6,9,14,20,25,30,34 or 39 on the Pi to Pin 1 (+5V).
+Pin 1 or 2 on the Pi to +5V (Pin 1, top of the board).  
+Pin 6,9,14,20,25,30,34 or 39 on the Pi to GND (Pin 2).  
 
 I strongly recommend that you connect these with power off! You can then turn on your Amiga (ensuring the Pi cannot short on anything) which will boot the Pi and then allow you to flash as normal. 
 
