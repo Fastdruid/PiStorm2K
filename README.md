@@ -1,6 +1,6 @@
 # PiStorm2K v2.0 - BOSS Edition.
 
-This is a rework of the original PiStorm2K to add some additional potential capabilities while remaining 100% compatiblity with existing and future firmware. 
+This is a rework of the original PiStorm2K to add some additional potential capabilities while remaining 100% compatible with existing and future firmware. 
 
 # Summary of changes
 ### Additional control lines.
