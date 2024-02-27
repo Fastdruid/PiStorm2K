@@ -2,10 +2,38 @@
 
 This is a rework of the original PiStorm2K to add some additional potential capabilities while remaining 100% compatible with existing and future firmware. 
 
-The original PiStorm2K was imported from Gerbers into KiCAD and then revised. The initial KiCAD PiStorm2K is also contained within this repo however there were a lots of bits clean-up on v2.0 that didn't happen on v1.0. 
+The original PiStorm2K was imported from Gerbers into KiCAD and then revised. The initial KiCAD PiStorm2K is also contained within this repo however there were a lots of bits cleaned-up on v2.0 that didn't happen on v1.0. 
+
+# Why
+
+An excellent question. I don't even have an Amiga 2000 (any donations of one welcome however!)
+This all spiralled from LazaruStorm not playing nicely with the original Processor on my 68k. This took me down the hole of *why* it didn't, because it _should_. In short the issue is due to the E(nable) Clock that is used for 6800 type devices (which the CIA chips are). The 68k does not stop generating the E-Clock, there is no way to tell at what state it will start up in and so it's a random lottery if the E-Clock generated from the PiStorm happens to "line up". 
+
+I then took a look at the Verilog firmware and thought "this appears reasonably understandable". From there I got the PiStorm to start off by listening for the E-Clock, and either generate one or sync to an existing one. After that I got it to correctly Bus Arbitrate and request the Bus rather than the brute force method LazaruStorm uses of just holding BR asserted. 
+
+Once I'd got that working nicely I then got it to swap between PiStorm and original processor using a long hold Ctrl-A-A. 
+
+At the same time I looked at the Zorro-II specs pinout for the Denise I'd just built and realised it was 98% compatible with the A2000 Co-Processor, had no 7MHz clock on pin 7 but could do the same as the A2000 and generate it from C1/C3.
+I ordered one of those and created an adaptor to fit it into the Zorro-II slot and re-wrote the firmware to swap between modes on the CLK_SEL pin (because Denise can't do a long Ctrl-A-A but has a mechanism to disable items via numlock->reset).
+
+I also designed an adaptor to fit the card inside the A500(+). By this stage I was experimenting with a bunch of stuff and wanted something where I could access the remaining lines on the CPLD and at the same time be a useful upgrade. Which is where this comes in.
+With appropriate firmware it should be able to do the same in a B2000 as it does in the A500(+) and Denise. ie swap between 68k and PiStorm at will. In theory the firmware may also do DMA...but that is very, very untested. 
 
 # Status
 UNTESTED - Initial production ordered 26/02/2024
+
+# Building 
+## Options
+   1) U6 & C13 are optional. Not so much use on the A2000, desired for the B2000
+   2) H1, H2 and H3 are optional as they can be controlled by solder blobs however H4 is required. 
+   3) R3 is optional and for 99.9% of use cases is pointless. 
+   4) For A2000 R4 can be omitted. 
+
+## Known issues
+ 1) V2.0 of the BOM incorrectly used 0603 for the resistors and capacitors where the footprint was 0402. Fixed in BOM v2.0.1
+ 2) V2.0 of the BOM incorrectly used a 680R resistor instead of a 68R for R3. Fixed in BOM v2.0.1
+ 3) V2.0 of the BOM incorrectly used a 1K1 resistor instead of a 1K for R3. Fixed in BOM v2.0.1
+ 4) Rotations of the chips are all wrong from the placement file. I need to understand here why KiCAD messed it up but if ordering from JLCPCB you will need to manually rotate them to the correct orientation. 
 
 # Summary of changes
 ### Additional control lines.
