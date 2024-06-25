@@ -2,6 +2,7 @@
 
 ## v2.1
 1) Rotation on placement appears wrong when placing order on JLCPCB - Manually rotate all chips to match footprints.
+2) BOSS pulldown 1k is not enough, use 0 Ohm or less
 
 ## v2.0
 
